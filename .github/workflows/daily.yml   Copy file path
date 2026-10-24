@@ -1,0 +1,32 @@
+
+name: Daily Commit
+
+on:
+  schedule:
+    - cron: "35 18 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  daily-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update daily log
+        run: |
+          mkdir -p logs
+          echo "$(date -u +%F) - Daily activity log" >> logs/daily.md
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add logs/daily.md
+          git commit -m "docs: update daily activity log"
+          git push
