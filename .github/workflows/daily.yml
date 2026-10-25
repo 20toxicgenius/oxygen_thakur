@@ -22,8 +22,8 @@ jobs:
 
       - name: Commit changes
         run: |
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git config user.name "20toxicgenius"
+          git config user.email "madhavkumarthakur21@gmail.com"
           git add logs/daily.md
           git commit -m "docs: update daily development log"
           git push
